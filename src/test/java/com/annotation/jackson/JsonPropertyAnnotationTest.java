@@ -9,8 +9,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.*;
 import org.junit.rules.Timeout;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 
@@ -40,7 +39,6 @@ public class JsonPropertyAnnotationTest {
     @BeforeEach
     void setUpBeforeEach() throws Exception {
         log.info("setUpBeforeEach-->");
-
     }
 
     @AfterEach
@@ -51,8 +49,10 @@ public class JsonPropertyAnnotationTest {
 
     @Test
     @DisplayName("Test Serializing With JsonIgnore")
-    @RepeatedTest(1)
+    //@RepeatedTest(1)
     public void testSerializingWithJsonIgnore() throws JsonProcessingException {
+        annotation = new JsonPropertyAnnotation();
+        objectMapper = new ObjectMapper();
 
         final String jsonString = objectMapper.writeValueAsString(annotation);
         log.info("jsonString-->" + jsonString);
@@ -63,9 +63,18 @@ public class JsonPropertyAnnotationTest {
     }
 
     @Test
-    public void testDeSerializingWithJsonIgnore() {
+    @DisplayName("Test DeSerializing With JsonIgnore")
+    public void testDeSerializingWithJsonIgnore() throws Exception {
+        annotation = new JsonPropertyAnnotation();
+        objectMapper = new ObjectMapper();
 
-        log.info("diff-->" + diff);
+        final String jsonString = "{\"type\": \"Male\", \"username\": \"SunilSoni\", \"newUser\": false, \"text\": \"Sunil Soni\", \"id\": \"123\", \"date\": \"2018-04-29\"}";
+        final JsonPropertyAnnotation jsonPropertyAnnotation = objectMapper.readValue(jsonString, JsonPropertyAnnotation.class);
+        log.info("jsonPropertyAnnotation-->" + jsonPropertyAnnotation);
+
+        assertThat(jsonPropertyAnnotation.Type, is(equalTo("Male")));
+        assertThat(jsonPropertyAnnotation.Username, is(equalTo("SunilSoni")));
+
     }
 
 }
