@@ -26,11 +26,11 @@ Only needs to be added to one of accessors/mutators (field, getter/setter, const
 
 @Controller::  @Controller annotation marks a class as a Spring Web MVC controller. It too is a @Component specialization, so beans marked with it are automatically imported into the DI container. When you add the @Controller annotation to a class, you can use another annotation i.e. @RequestMapping; to map URLs to instance methods of a class.
 
-Inner Static Component:: We can also define a static inner class as a component. Default bean name of the inner static class would be decapitalized name of the outer class + “.” + Inner class name. For example, to get the bean of inner static class BeanB.InnerBeanB, it would be:
+Inner Static Component:: We can also define a static inner class as a component. Default bean name of the inner static class would be decapitalized name of the outer class + “.” + Inner class name. For example, to get the bean of inner static class EmployeeServiceImpl.EmployeeInnerBean, it would be:
 
 [source,java]
 -----------------
- ctx.getBean("beanB.InnerBeanB")
+ context.getBean("employeeServiceImpl.EmployeeInnerBean");
 -----------------
 
 
