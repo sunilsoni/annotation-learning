@@ -2,7 +2,7 @@
 
 
 
-== https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/jackson/[Jackson Annotation]
+== https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/jackson/[Jackson Annotations]
  
 
 * https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/jackson/JsonPropertyAnnotationTest.java[@JsonProperty] The @JsonProperty annotation is used to map property names with JSON keys during serialization and deserialization. By default, if you try to serialize a POJO, the generated JSON will have keys mapped to the fields of the POJO. If you want to override this behavior, you can use the @JsonProperty annotation on the fields. It takes a String attribute that specifies the name that should be mapped to the field during serialization.
@@ -13,7 +13,7 @@ You can also use this annotation during deserialization when the property names 
 Only needs to be added to one of accessors/mutators (field, getter/setter, constructor parameter), but will have effect on the "whole" property: that is, adding annotation to a "getter" will also disable "setter"
   unless "setter" has @JsonProperty, in which case this is considered a "split property" with enabled "setter" but no "getter" ("read-only", so that property may be read from input, but is not written output)
 
-== https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/[Spring Annotation]
+== https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/[Spring Annotations]
 
 
 * https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/ComponentAnnotationTest.java[@Component, @Repository, @Service, @Controller]This annotation is used on classes to indicate a Spring component. The @Component annotation marks the Java class as a bean or say component so that the component-scanning mechanism of Spring can add into the application context.
@@ -32,6 +32,25 @@ Inner Static Component:: We can also define a static inner class as a component.
 -----------------
  context.getBean("employeeServiceImpl.EmployeeInnerBean");
 -----------------
+
+* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/ConfigurationAnnotationTest.java[@Configuration] @Configuration classes are just like regular @Components classes as @Configuration is meta-annotated with @Component.
+
+[source,java]
+-----------------
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Configuration {
+	@AliasFor(annotation = Component.class)
+	String value() default "";
+}
+-----------------
+
+When the class containing @Configuration or @Component contains @Bean annotated methods, those methods act as factory beans so what is the difference? The difference lies in the inter-bean references when one @Bean method invokes another @Bean method. If the class is annotated with @Component the @Bean method invocation is treated as a standard Java method invocation whereas when a @Bean method declared in @Configuration is called the method invocation is intercepted using CGLIB proxy and the bean cached in the spring container is returned.
+
+When a @Bean annotated method owned by the @Component class is called the method is simply re-invoked and we will get a new bean at each invocation rather than returning the one cached in the container. When @Bean methods are re-invoked @Configuration annotation is preferred.
+
 
 
 
