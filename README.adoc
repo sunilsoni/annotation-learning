@@ -13,3 +13,25 @@ You can also use this annotation during deserialization when the property names 
 Only needs to be added to one of accessors/mutators (field, getter/setter, constructor parameter), but will have effect on the "whole" property: that is, adding annotation to a "getter" will also disable "setter"
   unless "setter" has @JsonProperty, in which case this is considered a "split property" with enabled "setter" but no "getter" ("read-only", so that property may be read from input, but is not written output)
 
+== https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/[Spring Annotation]
+
+
+* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/ComponentAnnotationTest.java[@Component, @Repository, @Service, @Controller]This annotation is used on classes to indicate a Spring component. The @Component annotation marks the Java class as a bean or say component so that the component-scanning mechanism of Spring can add into the application context.
+
+@Component annotation is the more generalized form that are considered as candidates for auto-detection when using annotation-based configuration and classpath scanning. This annotation extended to more specific forms such as @Controller, @Repository and @Service.
+
+@Repository:: The @Repository annotation is a specialization of the @Component annotation with similar use and functionality. In addition to importing the DAOs into the DI container, it also makes the unchecked exceptions (thrown from DAO methods) eligible for translation into Spring DataAccessException.
+
+@Service:: The @Service annotation is also a specialization of the component annotation. It doesn’t currently provide any additional behavior over the @Component annotation, but it’s a good idea to use @Service over @Component in service-layer classes because it specifies intent better. Additionally, tool support and additional behavior might rely on it in the future.
+
+@Controller::  @Controller annotation marks a class as a Spring Web MVC controller. It too is a @Component specialization, so beans marked with it are automatically imported into the DI container. When you add the @Controller annotation to a class, you can use another annotation i.e. @RequestMapping; to map URLs to instance methods of a class.
+
+Inner Static Component:: We can also define a static inner class as a component. Default bean name of the inner static class would be decapitalized name of the outer class + “.” + Inner class name. For example, to get the bean of inner static class BeanB.InnerBeanB, it would be:
+
+[source,java]
+-----------------
+ ctx.getBean("beanB.InnerBeanB")
+-----------------
+
+
+
