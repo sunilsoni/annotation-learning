@@ -16,7 +16,7 @@ Only needs to be added to one of accessors/mutators (field, getter/setter, const
 == https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/[Spring Annotations]
 
 
-* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/ComponentAnnotationTest.java[@Component, @Repository, @Service, @Controller]This annotation is used on classes to indicate a Spring component. The @Component annotation marks the Java class as a bean or say component so that the component-scanning mechanism of Spring can add into the application context.
+* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/Component/ComponentAnnotationTest.java[@Component, @Repository, @Service, @Controller]This annotation is used on classes to indicate a Spring component. The @Component annotation marks the Java class as a bean or say component so that the component-scanning mechanism of Spring can add into the application context.
 
 @Component annotation is the more generalized form that are considered as candidates for auto-detection when using annotation-based configuration and classpath scanning. This annotation extended to more specific forms such as @Controller, @Repository and @Service.
 
@@ -33,7 +33,7 @@ Inner Static Component:: We can also define a static inner class as a component.
  context.getBean("employeeServiceImpl.EmployeeInnerBean");
 -----------------
 
-* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/ConfigurationAnnotationTest.java[@Configuration] @Configuration classes are just like regular @Components classes as @Configuration is meta-annotated with @Component.
+* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/Configuration/ConfigurationAnnotationTest.java[@Configuration] @Configuration classes are just like regular @Components classes as @Configuration is meta-annotated with @Component.
 
 [source,java]
 -----------------
