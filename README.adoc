@@ -13,6 +13,17 @@ You can also use this annotation during deserialization when the property names 
 Only needs to be added to one of accessors/mutators (field, getter/setter, constructor parameter), but will have effect on the "whole" property: that is, adding annotation to a "getter" will also disable "setter"
   unless "setter" has @JsonProperty, in which case this is considered a "split property" with enabled "setter" but no "getter" ("read-only", so that property may be read from input, but is not written output)
 
+* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/jackson/JsonAlias/JsonAliasAnnotationTest.java[@JsonAlias] Annotation that can be used to define one or more alternative names for a property, accepted during deserialization as alternative to the official name. Alias information is also exposed during POJO introspection, but has no effect during serialization where primary name is always used.
+
+Example::
+[source,java]
+-----------------
+ public class Info {
+   @JsonAlias({ "n", "Name" })
+   public String name;
+ }
+-----------------
+
 == https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/[Spring Annotations]
 
 
@@ -50,6 +61,11 @@ public @interface Configuration {
 When the class containing @Configuration or @Component contains @Bean annotated methods, those methods act as factory beans so what is the difference? The difference lies in the inter-bean references when one @Bean method invokes another @Bean method. If the class is annotated with @Component the @Bean method invocation is treated as a standard Java method invocation whereas when a @Bean method declared in @Configuration is called the method invocation is intercepted using CGLIB proxy and the bean cached in the spring container is returned.
 
 When a @Bean annotated method owned by the @Component class is called the method is simply re-invoked and we will get a new bean at each invocation rather than returning the one cached in the container. When @Bean methods are re-invoked @Configuration annotation is preferred.
+
+
+
+
+
 
 
 
