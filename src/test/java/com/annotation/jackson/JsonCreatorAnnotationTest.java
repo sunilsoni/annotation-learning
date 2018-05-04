@@ -1,15 +1,17 @@
 package com.annotation.jackson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.core.Is;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.IOException;
 
 public class JsonCreatorAnnotationTest {
 
     static ObjectMapper mapper;
+
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -22,8 +24,12 @@ public class JsonCreatorAnnotationTest {
     }
 
     @Test
-    public void testJsonAlias_JsonToObject() throws IOException {
+    public void testDeSerializingWithJsonCreator() throws Exception {
+        String jsonString = "{\"firstName\": \"Sunil\", \"lastName\": \"Soni\"}";
+        ObjectMapper mapper = new ObjectMapper();
+        JsonCreatorAnnotation bean = mapper.readValue(jsonString, JsonCreatorAnnotation.class);
 
+        Assert.assertThat(bean.firstName, Is.is(CoreMatchers.equalTo("Sunil")));
+        Assert.assertThat(bean.lastName, Is.is(CoreMatchers.equalTo("Soni")));
     }
-
 }
