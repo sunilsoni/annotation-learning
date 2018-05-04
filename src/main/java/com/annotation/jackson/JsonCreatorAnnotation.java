@@ -2,11 +2,13 @@ package com.annotation.jackson;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class JsonCreatorAnnotation {
 
-    private final String firstName;
-    private final String lastName;
+    public final String firstName;
+    public final String lastName;
 
 
     @JsonCreator
