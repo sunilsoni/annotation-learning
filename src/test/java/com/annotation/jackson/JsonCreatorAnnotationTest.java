@@ -25,9 +25,9 @@ public class JsonCreatorAnnotationTest {
 
     @Test
     public void testDeSerializingWithJsonCreator() throws Exception {
-        String jsonString = "{\"firstName\": \"Sunil\", \"lastName\": \"Soni\"}";
-        ObjectMapper mapper = new ObjectMapper();
-        JsonCreatorAnnotation bean = mapper.readValue(jsonString, JsonCreatorAnnotation.class);
+        final String jsonString = "{\"firstName\": \"Sunil\", \"lastName\": \"Soni\"}";
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonCreatorAnnotation bean = mapper.readValue(jsonString, JsonCreatorAnnotation.class);
 
         Assert.assertThat(bean.firstName, Is.is(CoreMatchers.equalTo("Sunil")));
         Assert.assertThat(bean.lastName, Is.is(CoreMatchers.equalTo("Soni")));
