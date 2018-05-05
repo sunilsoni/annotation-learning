@@ -94,7 +94,7 @@ Notice the annotation above the constructor and the annotations before the const
 }
 -----------------
 
-Def 3::The @JsonCreator annotation is used to tune the constructor/factory used in deserialization.  It’s very helpful when we need to deserialize some JSON that doesn’t exactly match the target entity we need to get.
+Def 3:: The @JsonCreator annotation is used to tune the constructor/factory used in deserialization.  It’s very helpful when we need to deserialize some JSON that doesn’t exactly match the target entity we need to get.
 
 Let’s look at an example; say we need to deserialize the following JSON:
 
