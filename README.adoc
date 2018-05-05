@@ -37,9 +37,91 @@ One common use case is to use a delegating Creator to construct instances from s
 
 NOTE:: As of Jackson 2.6, use of JsonProperty.required() is supported for Creator methods (but not necessarily for regular setters or fields!).
 
+Def 2:: The Jackson annotation @JsonCreator is used to tell Jackson that the Java object has a constructor (a "creator") which can match the fields of a JSON object to the fields of the Java object.
 
+The @JsonCreator annotation is useful in situations where the @JsonSetter annotation cannot be used. For instance, immutable objects do not have any setter methods, so they need their initial values injected into the constructor. Look at this PersonImmutable class as example:
+[source,java]
+-----------------
+public class PersonImmutable {
 
+    private long   id   = 0;
+    private String name = null;
 
+    public PersonImmutable(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+}
+-----------------
+
+To tell Jackson that it should call the constructor of PersonImmutable we must add the @JsonCreator annotation to the constructor. But that alone is not enough. We must also annotate the parameters of the constructor to tell Jackson which fields from the JSON object to pass to which constructor parameters. Here is how the PersonImmutable class looks with the @JsonCreator and @JsonProperty annotations added:
+[source,java]
+-----------------
+public class PersonImmutable {
+
+    private long   id   = 0;
+    private String name = null;
+
+     @JsonCreator
+        public PersonImmutable(
+                @JsonProperty("id")  long id,
+                @JsonProperty("name") String name  ) {
+
+            this.id = id;
+            this.name = name;
+        }
+    public long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+}
+-----------------
+Notice the annotation above the constructor and the annotations before the constructor parameters. Now Jackson is capable of creating a PersonImmutable from this JSON object:
+
+[source,java]
+-----------------
+{
+  "id"   : 1234,
+  "name" : "John"
+}
+-----------------
+
+Def 3::The @JsonCreator annotation is used to tune the constructor/factory used in deserialization.  It’s very helpful when we need to deserialize some JSON that doesn’t exactly match the target entity we need to get.
+
+Let’s look at an example; say we need to deserialize the following JSON:
+
+[source,java]
+-----------------
+{
+    "id":1,
+    "theName":"My bean"
+}
+-----------------
+However, there is no theName field in our target entity – there is only a name field. Now – we don’t want to change the entity itself – we just need a little more control over the unmarshalling process – by annotating the constructor with @JsonCreator and using the @JsonProperty annotation as well:
+
+[source,java]
+-----------------
+public class BeanWithCreator {
+    public int id;
+    public String name;
+
+    @JsonCreator
+    public BeanWithCreator(
+      @JsonProperty("id") int id,
+      @JsonProperty("theName") String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+-----------------
 
 
 == https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/[Spring Annotations]
