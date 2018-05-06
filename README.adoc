@@ -2,7 +2,11 @@
 
 
 
-== https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/jackson/[Jackson Annotations]
+== https://github.com/sunilsoni/annotation-learning/tree/master/src/test/java/com/annotation/custom/[Custom Annotations]
+
+* https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/custom/controller/FormControllerTest.java[Form Validations]
+
+== https://github.com/sunilsoni/annotation-learning/tree/master/src/test/java/com/annotation/jackson/[Jackson Annotations]
  
 
 * https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/jackson/JsonPropertyAnnotationTest.java[@JsonProperty] The @JsonProperty annotation is used to map property names with JSON keys during serialization and deserialization. By default, if you try to serialize a POJO, the generated JSON will have keys mapped to the fields of the POJO. If you want to override this behavior, you can use the @JsonProperty annotation on the fields. It takes a String attribute that specifies the name that should be mapped to the field during serialization.
@@ -124,7 +128,7 @@ public class BeanWithCreator {
 -----------------
 
 
-== https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/[Spring Annotations]
+== https://github.com/sunilsoni/annotation-learning/tree/master/src/test/java/com/annotation/spring/[Spring Annotations]
 
 
 * https://github.com/sunilsoni/annotation-learning/blob/master/src/test/java/com/annotation/spring/Component/ComponentAnnotationTest.java[@Component, @Repository, @Service, @Controller]This annotation is used on classes to indicate a Spring component. The @Component annotation marks the Java class as a bean or say component so that the component-scanning mechanism of Spring can add into the application context.
