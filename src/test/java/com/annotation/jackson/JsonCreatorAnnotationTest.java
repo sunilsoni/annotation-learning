@@ -26,7 +26,7 @@ public class JsonCreatorAnnotationTest {
     @Test
     public void testDeSerializingWithJsonCreator() throws Exception {
         final String jsonString = "{\"firstName\": \"Sunil\", \"lastName\": \"Soni\"}";
-        final ObjectMapper mapper = new ObjectMapper();
+
         final JsonCreatorAnnotation bean = mapper.readValue(jsonString, JsonCreatorAnnotation.class);
 
         Assert.assertThat(bean.firstName, Is.is(CoreMatchers.equalTo("Sunil")));
