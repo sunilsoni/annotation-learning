@@ -1,7 +1,11 @@
 package com.annotation.custom.controller;
 
+import com.annotation.custom.validators.ValidationError;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,5 +48,12 @@ public class FormController {
         }
 
         return userDetails;
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ValidationError> handleValidationErrors(final MethodArgumentNotValidException e) {
+
+
+        return null;
     }
 }
