@@ -20,18 +20,18 @@ public class ConfigurationAnnotationTest {
 
     @BeforeClass
     public static void setUp() {
-        log.info("setUp");
+        log.info("inside ::	ConfigurationAnnotationTest	::	setUp()");
     }
 
     @AfterEach
     public static void tearDown() {
-        log.info("tearDown");
+        log.info("inside ::	ConfigurationAnnotationTest	::	tearDown()");
     }
 
     @Test
     public void testBeanAsComponent() {
 
-        log.info("testBeanAsComponent");
+        log.info("inside ::	ConfigurationAnnotationTest	::	testBeanAsComponent()");
 
 
         final LocalDataSource componentBean = (LocalDataSource) ctx.getBean("localDataSource");
@@ -45,7 +45,7 @@ public class ConfigurationAnnotationTest {
 
     @Test
     public void testBeanAsConfiguration() {
-        log.info("testBeanAsConfiguration");
+        log.info("inside ::	ConfigurationAnnotationTest	::	testBeanAsConfiguration()");
 
     }
 }
